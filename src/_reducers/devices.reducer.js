@@ -1,6 +1,7 @@
 import { deviceConstants } from '../_constants';
 
 export function devices(state = {}, action) {
+  
   switch (action.type) {
     case deviceConstants.GETALL_REQUEST:
       return {

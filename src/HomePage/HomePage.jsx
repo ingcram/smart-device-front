@@ -1,25 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {deviceActions}  from '../_actions';
+console.log(deviceActions);
+//REDUX DEV TOOLS
+//REDUX LOGGER
 
-import { userActions, deviceActions } from '../_actions';
+class HomePage extends React.Component {    
+    //TODO : AIRBNB-ESLINT    
 
-class HomePage extends React.Component {
     componentDidMount() {
-        this.props.dispatch(userActions.getAll());
-        this.props.dispatch(deviceActions.getAll())
-    }
-    
-    handleDeleteUser(id) {
-        return (e) => this.props.dispatch(userActions.delete(id));
-    }
+        this.props.getAll();
+    }   
 
     handleDeleteDevice(id) {
-        return (e) => this.props.dispatch(deviceActions.delete(id));
+        return (e) => this.props.delete(id);
     }
 
     render() {
-        const { user, users } = this.props;
+        const { user } = this.props;
         const { devices } = this.props;
         return (
             <div className="col-md-6 col-md-offset-3">
@@ -31,11 +31,11 @@ class HomePage extends React.Component {
                     <ul>
                         {devices.items.map((device, index) =>
                             <li key={device.id}>
-                                <Link to={"/smartDevice/"+device.id}>{device.name}</Link>
+                                <Link to={"/smart-device/edit/"+device.id}>{device.name}</Link>
                                 {
                                     device.deleting ? <em> - Deleting...</em>
                                     : device.deleteError ? <span className="text-danger"> - ERROR: {device.deleteError}</span>
-                                    : <span> - <a onClick={this.handleDeleteUser(device.id)}>Delete</a></span>
+                                    : <span> - <a onClick={this.handleDeleteDevice(device.id)}>Delete</a></span>
                                 }
                             </li>
                         )}
@@ -45,22 +45,26 @@ class HomePage extends React.Component {
                     <Link to="/login">Logout</Link>
                 </p>
                 <p>
-                    <Link to="/smartDevice">Smart Devices</Link>
+                    <Link to="/smart-device">Smart Devices</Link>
                 </p>
             </div>
         );
     }
 }
 
+HomePage.propTypes = {
+    getAllDevices : PropTypes.func,
+    deleteDevice : PropTypes.func,
+};
+
 function mapStateToProps(state) {
-    const { users, authentication, devices } = state;
+    const { authentication, devices } = state;
     const { user } = authentication;
     return {
-        user,
-        users,
+        user,        
         devices
     };
 }
 
-const connectedHomePage = connect(mapStateToProps)(HomePage);
+const connectedHomePage = connect(mapStateToProps, deviceActions)(HomePage);
 export { connectedHomePage as HomePage };

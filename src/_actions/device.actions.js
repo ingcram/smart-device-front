@@ -3,6 +3,8 @@ import { deviceService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
 
+//TODO: Cambiar a redux_sagas
+
 export const deviceActions = {
     create,
     update,
