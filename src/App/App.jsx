@@ -10,6 +10,7 @@ import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
 import { SmartDevicePage } from '../SmartDevicePage';
 import { EditSmartDevice } from '../EditSmartDevice';
+import { SmartDeviceControlPage } from '../SmartDeviceControlPage';
 
 class App extends React.Component {
     constructor(props) {
@@ -38,6 +39,7 @@ class App extends React.Component {
                                 <Route path="/register" component={RegisterPage} />                                                                
                                 <Route path="/smart-device/new" component={SmartDevicePage} />
                                 <Route path="/smart-device/edit/:id" component={EditSmartDevice} />
+                                <Route path="/smart-device/control/:id" component={SmartDeviceControlPage} />
                             </div>
                         </Router>
                     </div>

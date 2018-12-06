@@ -9,8 +9,13 @@ export const deviceActions = {
     create,
     update,
     getAll,
+    get,
     delete: _delete
 };
+
+function deviceUnload() {
+    return { type: deviceConstants.GET_SUCCESS_UNLOAD };
+}
 
 function create(device) {
     return dispatch => {
@@ -72,6 +77,27 @@ function getAll() {
     function request() { return { type: deviceConstants.GETALL_REQUEST } }
     function success(devices) { return { type: deviceConstants.GETALL_SUCCESS, devices } }
     function failure(error) { return { type: deviceConstants.GETALL_FAILURE, error } }
+}
+
+function get(idDevice) {
+    console.log("deviceActions "+idDevice);
+
+    return dispatch => {
+        dispatch(request());
+
+        deviceService.get(idDevice)
+            .then(
+                device => {
+                    dispatch(success(device));
+                    dispatch(deviceUnload());
+                },
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request() { return { type: deviceConstants.GET_REQUEST } }
+    function success(device) { return { type: deviceConstants.GET_SUCCESS, device } }
+    function failure(error) { return { type: deviceConstants.GET_FAILURE, error } }
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript

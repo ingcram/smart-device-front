@@ -4,6 +4,7 @@ import { authHeader } from '../_helpers';
 export const deviceService = {    
     getAll,    
     delete: _delete,
+    get,
     create,
     update 
 };
@@ -15,6 +16,16 @@ function getAll() {
     };
 
     return fetch(`${config.apiUrl}/devices`, requestOptions).then(handleResponse);
+}
+
+function get(idDevice) {
+    console.log("service "+idDevice);
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${config.apiUrl}/devices/`+idDevice, requestOptions).then(handleResponse);
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
@@ -44,7 +55,7 @@ function update(device) {
         body: JSON.stringify(device)
     };
 
-    return fetch(`${config.apiUrl}/devices`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/devices/${device.id}`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

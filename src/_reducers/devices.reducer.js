@@ -1,15 +1,28 @@
 import { deviceConstants } from '../_constants';
+const initialState = {
+  device : {
+    id:'',
+    name:'',
+    ip:'',
+    description:'',
+    updatedAt:'',
+    createdAt:'',
+  }
+};
 
-export function devices(state = {}, action) {
+export function devices(state = initialState, action) {
   
   switch (action.type) {
     case deviceConstants.GETALL_REQUEST:
       return {
+        ...state,
         loading: true
       };
     case deviceConstants.GETALL_SUCCESS:
       return {
-        items: action.devices
+        ...state,
+        items: action.devices,
+        loading : false
       };
     case deviceConstants.GETALL_FAILURE:
       return { 
@@ -57,6 +70,27 @@ export function devices(state = {}, action) {
       return {};
     case deviceConstants.UPDATE_FAILURE:
       return {};
+    case deviceConstants.GET_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+      };
+    case deviceConstants.GET_SUCCESS:
+      return {        
+        device: action.device,
+        loading: false,
+        loaded: true,
+      };
+    case deviceConstants.GET_SUCCESS_UNLOAD:
+      return {        
+        ...state,
+        loaded: false,
+      };
+    case deviceConstants.GET_FAILURE:
+      return { 
+        error: action.error
+      };
     default:
       return state
   }

@@ -7,6 +7,7 @@ module.exports = {
         path: path.resolve('dist'),
         filename: 'bundle.js'
     },
+    devtool: 'cheap-module-source-map',
     resolve: {
         extensions: ['.js', '.jsx']
     },
