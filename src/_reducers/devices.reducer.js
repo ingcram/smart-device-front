@@ -1,17 +1,17 @@
-import { deviceConstants } from '../_constants';
+import { deviceConstants } from "../_constants";
 const initialState = {
-  device : {
-    id:'',
-    name:'',
-    ip:'',
-    description:'',
-    updatedAt:'',
-    createdAt:'',
+  device: {
+    id: "",
+    name: "",
+    ip: "",
+    description: "",
+    status: false,
+    updatedAt: "",
+    createdAt: ""
   }
 };
 
 export function devices(state = initialState, action) {
-  
   switch (action.type) {
     case deviceConstants.GETALL_REQUEST:
       return {
@@ -22,10 +22,10 @@ export function devices(state = initialState, action) {
       return {
         ...state,
         items: action.devices,
-        loading : false
+        loading: false
       };
     case deviceConstants.GETALL_FAILURE:
-      return { 
+      return {
         error: action.error
       };
     case deviceConstants.DELETE_REQUEST:
@@ -33,9 +33,7 @@ export function devices(state = initialState, action) {
       return {
         ...state,
         items: state.items.map(device =>
-          device.id === action.id
-            ? { ...device, deleting: true }
-            : device
+          device.id === action.id ? { ...device, deleting: true } : device
         )
       };
     case deviceConstants.DELETE_SUCCESS:
@@ -44,7 +42,7 @@ export function devices(state = initialState, action) {
         items: state.items.filter(device => device.id !== action.id)
       };
     case deviceConstants.DELETE_FAILURE:
-      // remove 'deleting:true' property and add 'deleteError:[error]' property to device 
+      // remove 'deleting:true' property and add 'deleteError:[error]' property to device
       return {
         ...state,
         items: state.items.map(device => {
@@ -74,24 +72,34 @@ export function devices(state = initialState, action) {
       return {
         ...state,
         loading: true,
-        loaded: false,
+        loaded: false
       };
     case deviceConstants.GET_SUCCESS:
-      return {        
+      return {
         device: action.device,
         loading: false,
-        loaded: true,
+        loaded: true
       };
     case deviceConstants.GET_SUCCESS_UNLOAD:
-      return {        
+      return {
         ...state,
-        loaded: false,
+        loaded: false
       };
     case deviceConstants.GET_FAILURE:
-      return { 
+      return {
         error: action.error
       };
+    case deviceConstants.TURNONOFF_REQUEST:
+      return { loading: true };
+    case deviceConstants.TURNONOFF_SUCCESS:
+      return {
+        ...state,
+        device: action.status,
+        loading: false
+      };
+    case deviceConstants.TURNONOFF_FAILURE:
+      return { error: action.error };
     default:
-      return state
+      return state;
   }
 }
