@@ -25,6 +25,7 @@ function turnOnOff(id) {
 
     deviceService.turnOnOff(id).then(
       device => {
+        console.log('device', device);
         dispatch(success(device));
       },
       error => {

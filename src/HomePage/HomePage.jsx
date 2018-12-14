@@ -59,7 +59,10 @@ class HomePage extends React.Component {
           <Link to="/login">Logout</Link>
         </p>
         <p>
-          <Link to="/smart-device">Smart Devices</Link>
+          <Link to="/smart-device/new">Registrar Smart Devices</Link>
+        </p>
+        <p>
+          <Link to="/test-page">Test Page</Link>
         </p>
       </div>
     );

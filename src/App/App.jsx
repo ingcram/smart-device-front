@@ -11,6 +11,7 @@ import { RegisterPage } from "../RegisterPage";
 import { SmartDevicePage } from "../SmartDevicePage";
 import { EditSmartDevice } from "../EditSmartDevice";
 import { SmartDeviceControlPage } from "../SmartDeviceControlPage";
+import { TestPage } from "../TestPage";
 
 class App extends React.Component {
   constructor(props) {
@@ -38,6 +39,7 @@ class App extends React.Component {
                 <Route path="/login" component={LoginPage} />
                 <Route path="/register" component={RegisterPage} />
                 <Route path="/smart-device/new" component={SmartDevicePage} />
+                 <Route path="/test-page" component={TestPage} />
                 <Route
                   path="/smart-device/edit/:id"
                   component={EditSmartDevice}

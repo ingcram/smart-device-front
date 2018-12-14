@@ -90,13 +90,15 @@ export function devices(state = initialState, action) {
         error: action.error
       };
     case deviceConstants.TURNONOFF_REQUEST:
-      return { loading: true };
+      return { ...state, loading: true };
     case deviceConstants.TURNONOFF_SUCCESS:
-      return {
-        ...state,
-        device: action.status,
-        loading: false
-      };
+      console.log('action', action);
+      console.log('action.device.status', action.device.status);
+      console.log(state);
+      const newState = {...state};
+      newState.device.status = action.device.status;
+      newState.loading = false;
+      return newState;
     case deviceConstants.TURNONOFF_FAILURE:
       return { error: action.error };
     default:
