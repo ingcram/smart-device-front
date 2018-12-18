@@ -31,13 +31,14 @@ module.exports = {
     })
   ],
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    disableHostCheck: true
   },
   externals: {
     // global app config object
     config: JSON.stringify({
       //apiUrl: 'http://192.168.15.9:8080',
-      apiUrl: "http://localhost:80"
+      apiUrl: "http://port-9997.smart-device-front-ingcram954121.codeanyapp.com"
     })
   }
 };

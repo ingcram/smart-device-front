@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import { Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -65,4 +65,4 @@ function mapStateToProps(state) {
 }
 
 const connectedApp = connect(mapStateToProps)(App);
-export { connectedApp as App };
+export { connectedApp as App };*/
