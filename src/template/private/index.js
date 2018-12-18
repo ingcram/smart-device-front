@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './dashboard.css'
 
 export default class PrivateLayout extends Component {
     render() {
@@ -19,13 +20,13 @@ export default class PrivateLayout extends Component {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <a className="navbar-brand" href="#">Smart4U</a>
+          <Link className="navbar-brand" to="/">Smart4U</Link> 
         </div>
         <div id="navbar" className="collapse navbar-collapse">
           <ul className="nav navbar-nav">
-            <li className="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><Link to="/">Home</Link> </li>
+            <li><Link to="/">About</Link> </li>
+            <li><Link to="/">Contact</Link> </li>
           </ul>
         </div>
       </div>

@@ -36,9 +36,9 @@ class SmartDeviceControlPage extends React.Component {
           <div className="col-md-6 col-md-offset-3">
             <h1>Smart Device Control</h1>
             <p>
-               <label class="switch">
+               <label className="switch">
                 <input type="checkbox" name="control" onChange={this.handleChecked} />
-                <span class="slider"></span>
+                <span className="slider"></span>
               </label>
               {device.status && <em>On</em>}
               {!device.status && <em>Off</em>}

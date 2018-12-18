@@ -22,48 +22,29 @@ class HomePage extends React.Component {
     const { devices } = this.props;
     return (
       <div className="col-md-6 col-md-offset-3">
-        <h1>Smart Devices {user.firstName}!</h1>
         <h3>All registered devices:</h3>
         {devices.loading && <em>Loading devices...</em>}
         {devices.error && (
           <span className="text-danger">ERROR: {devices.error}</span>
         )}
-        {devices.items && (
-          <ul>
-            {devices.items.map((device, index) => (
-              <li key={device.id}>
-                <Link to={"/smart-device/edit/" + device.id}>
-                  {device.name}
-                </Link>
-                {device.deleting ? (
-                  <em> - Deleting...</em>
-                ) : device.deleteError ? (
-                  <span className="text-danger">
-                    {" "}
-                    - ERROR: {device.deleteError}
-                  </span>
-                ) : (
-                  <span>
-                    {" "}
-                    - <a onClick={this.handleDeleteDevice(device.id)}>Delete</a>
-                  </span>
-                )}
-                <span>
-                  <Link to={"/smart-device/control/" + device.id}>Control</Link>
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
-        <p>
-          <Link to="/login">Logout</Link>
-        </p>
-        <p>
-          <Link to="/smart-device/new">Registrar Smart Devices</Link>
-        </p>
-        <p>
-          <Link to="/test-page">Test Page</Link>
-        </p>
+        <div className="table-responsive">
+          <table className="table">
+            <thead>
+              <tr>
+                <td>Nombre</td>    
+              </tr>            
+            </thead>                        
+              {devices.items && (
+              <tbody>
+                 {devices.items.map((device, index) => (
+                <tr key={device.id}>                  
+                  <td> <Link to={"/smart-device/control/" + device.id}> {device.name} </Link></td>                  
+                </tr>
+                  ))}               
+              </tbody>
+              )}
+          </table>          
+        </div>             
       </div>
     );
   }

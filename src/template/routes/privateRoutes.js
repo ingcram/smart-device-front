@@ -1,12 +1,13 @@
 import {HomePage} from '../../HomePage';
+import {SmartDeviceControlPage} from '../../SmartDeviceControlPage';
 
 export default {
     HomePage: {
         component: HomePage,
         path: '/'
-    }/*,
-    SmartDevicePage: {
-        component: SmartDevicePage,
-        path: '/smart-device/new'
-    }*/
+    },
+    SmartDeviceControlPage: {
+        component: SmartDeviceControlPage,
+        path: '/smart-device/control/:id'
+    }
 };
