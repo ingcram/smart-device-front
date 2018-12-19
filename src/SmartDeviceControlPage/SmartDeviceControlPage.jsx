@@ -11,16 +11,27 @@ class SmartDeviceControlPage extends React.Component {
     this.handleChecked = this.handleChecked.bind(this);
   }
 
-  componentDidMount() {}
+
+
+  componentDidMount() {
+    let deviceId = this.props.match.params.id;
+    console.log("dispositivo apagar",deviceId);
+   
+    this.props.isOn(deviceId);
+
+    setInterval(
+      function() {
+        this.props.isOn(deviceId);
+      }
+      .bind(this),
+      3000
+    );
+
+  }
 
   handleChecked() {
     console.log(this);
     this.props.turnOnOff(this.props.match.params.id);
-    if (true) {
-      console.log("true"), this.props.match.params.id;
-    } else {
-      console.log("isNotChecked");
-    }
   }
 
   render() {
@@ -33,6 +44,7 @@ class SmartDeviceControlPage extends React.Component {
             <input
               type="checkbox"
               name="control"
+              checked={devices.device.status}
               onChange={this.handleChecked}
             />
             {devices.device.status && <em>On</em>}

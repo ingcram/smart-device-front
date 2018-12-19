@@ -32,25 +32,10 @@ class HomePage extends React.Component {
           <ul>
             {devices.items.map((device, index) => (
               <li key={device.id}>
-                <Link to={"/smart-device/edit/" + device.id}>
-                  {device.name}
+                <Link to={"/smart-device/control/" + device._sysInfo.deviceId}>
+                  {console.log(device._sysInfo.alias)}
+                  {device._sysInfo.alias}
                 </Link>
-                {device.deleting ? (
-                  <em> - Deleting...</em>
-                ) : device.deleteError ? (
-                  <span className="text-danger">
-                    {" "}
-                    - ERROR: {device.deleteError}
-                  </span>
-                ) : (
-                  <span>
-                    {" "}
-                    - <a onClick={this.handleDeleteDevice(device.id)}>Delete</a>
-                  </span>
-                )}
-                <span>
-                  <Link to={"/smart-device/control/" + device.id}>Control</Link>
-                </span>
               </li>
             ))}
           </ul>

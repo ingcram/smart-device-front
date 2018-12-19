@@ -95,11 +95,23 @@ export function devices(state = initialState, action) {
       console.log('action', action);
       console.log('action.device.status', action.device.status);
       console.log(state);
-      const newState = {...state};
+      let newState = {...state};
       newState.device.status = action.device.status;
       newState.loading = false;
       return newState;
-    case deviceConstants.TURNONOFF_FAILURE:
+    case deviceConstants.TURNONOFF_REQUEST:
+      return { ...state, loading: true };
+    case deviceConstants.GETON_REQUEST:
+      return { ...state };
+    case deviceConstants.GETON_SUCCESS:
+      console.log('action', action);
+      console.log('action.device.status', action.device.status);
+      console.log(state);
+      let newStat = {...state};
+      newStat.device.status = action.device.status;
+      newStat.loading = false;
+      return newStat;
+    case deviceConstants.GETON_FAILURE:
       return { error: action.error };
     default:
       return state;

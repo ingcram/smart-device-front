@@ -11,7 +11,8 @@ export const deviceActions = {
   getAll,
   get,
   turnOnOff,
-  delete: _delete
+  delete: _delete,
+  isOn
 };
 
 function deviceUnload() {
@@ -170,5 +171,30 @@ function _delete(id) {
   }
   function failure(id, error) {
     return { type: userConstants.DELETE_FAILURE, id, error };
+  }
+}
+
+function isOn(idDevice) {
+  console.log("deviceActions " + idDevice);
+
+  return dispatch => {
+    dispatch(request());
+
+    deviceService.isOn(idDevice).then(
+      device => {
+        dispatch(success(device));
+      },
+      error => dispatch(failure(error.toString()))
+    );
+  };
+
+  function request() {
+    return { type: deviceConstants.GETON_REQUEST };
+  }
+  function success(device) {
+    return { type: deviceConstants.GETON_SUCCESS, device };
+  }
+  function failure(error) {
+    return { type: deviceConstants.GETON_FAILURE, error };
   }
 }

@@ -7,18 +7,19 @@ export const deviceService = {
   get,
   create,
   turnOnOff,
-  update
+  update,
+  isOn
 };
 
-function turnOnOff(id) {
-  console.log("roberto", id);
+function turnOnOff(identifier) {
+  console.log("roberto", identifier);
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ip: "192.168.15.2" })
+    body: JSON.stringify({ identifier: identifier })
   };
 
-  return fetch(`${config.apiUrl}/turnOn`, requestOptions).then(handleResponse);
+  return fetch(`${config.apiUrl}/devices/turn-on-off`, requestOptions).then(handleResponse);
 }
 
 function getAll() {
@@ -85,4 +86,13 @@ function handleResponse(response) {
     }
     return data;
   });
+}
+
+function isOn(deviceId) {
+  const requestOptions = {
+    method: "GET",
+    headers: authHeader()
+  };
+
+  return fetch(`${config.apiUrl}/devices/is-on/`+deviceId, requestOptions).then(handleResponse);
 }
